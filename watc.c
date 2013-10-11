@@ -29,6 +29,7 @@ int main(int argc, char** argv){
     Source* s = read_file(sources[i]);
     char* buf = b.data;
     int size = b.size;
+    Parse_Data* parse_data = parse(buf, size);
     close_file(s);
   }
 

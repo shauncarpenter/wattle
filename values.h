@@ -20,12 +20,14 @@ typedef struct Table{
   struct Node* hash;
   struct Value* array;
   int array_size;
+  Node* last_free; //
 }Table;
 
 typedef struct Node{
   struct Value* key;
   struct Value* val;
   struct Node* next;
+  struct Node* last_free;
 }Node;
 
 typedef struct String{
@@ -41,7 +43,7 @@ typedef struct Function{
   //No idea for this yet.
 }Function;
 
-const int nil_tag = 0;
+//const int nil_tag = 0;
 const int table_tag = 1;
 const int string_tag = 2;
 const int number_tag = 3;

@@ -1,0 +1,22 @@
+  Alrighty, let's see what I remember about how these tables work.
+  A table is composed of two parts, an array part and a hash part.  Let's focus solely on the hash part for now.  The hash part is an array of Nodes, each one containing a key and a value.  The interface to the hash is composed of two main functions: add_new_key and get_key.  add_new_key will set a non-existent key in the table to a value, while get_key will retrieve a value, given the key.
+  get_key is rather simple, 
+  1. Hash the key
+  2. Find the location indicated by the hash
+  3. if the original spot is taken, move to the next node in the chain.
+  4. Repeat 3 until you find the node with the correct key, return the node
+  5. If you reach an empty node, return NULL (or the nil object).
+
+  add_new_key will be called when the language is performing a set operation (table[key] = value), but the key wasn't found (nil was returned).  This function is more complicated, and works as follows:
+  1. Hash the key into an index.
+  2. Find the Node that index points to
+  3. If that space is empty, return the pointer to the Node. 
+  4. If it is full, then hash the key that is already there.
+  5. If the existing key's hash points to the location it is in, (it is in it's "main position), then the original stays,
+     1. Find the next free space
+     2. Set the original to point to that space, while the new node points to the original second node in the chain
+     3. Now the new node will be the second in the chain, pushing the *original* second into 3rd position.  This way, the most recently inserted table element is placed in first position.
+     4. Return the new node
+  6. If the original *isn't* in it's main position, then do the same as #5, but move the original instead.  Return the new nodes position.
+
+  Simple enough.  I'm still not really sure how it has an improvement over a standard chaining algorithm, except that you don't have to follow the chain to the end every time you insert an element
