@@ -11,12 +11,9 @@ typedef struct Source{
   FILE* fp;
 }Source;
 
-typedef struct Parse_Data{
-}Parse_Data
 
 Source* read_file(char* path); 
 void close_file(Source* s);
-Parse_Data* parse(char* buf, long long int size);
 
 int main(int argc, char** argv){
   int files = argc-1;
@@ -58,9 +55,4 @@ void close_file(Source* s){
   free(s->data);
   fclose(s->fp);
 }
-
-Parse_Data* parse(char* buf, long long int size){
-  int i=0;
-  Parse_Data* data = malloc(sizeof(Parse_Data));
-
 

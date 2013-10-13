@@ -1,11 +1,11 @@
-Solution "Sol"
+solution "wattle"
   configurations "Debug"
-  flags {"Symbol"}
-  buildoptions {"-g"}
+  flags {"Symbols"}
+  buildoptions {"-g", "-std=c99"}
 
-  --solc is the compiler which converts sol code into c code
-  project "solc"
+  project "table_test"
     kind "ConsoleApp"
-    language "C" --FUCK C++
-    files {"./src/*.h", "./src/*.cpp"}
-    links {"tcc"}
+    language "C"
+    files {"./*.c", "./*.c"}
+    excludes {"wat*"}
+    

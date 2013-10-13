@@ -1,4 +1,5 @@
-  Alrighty, let's see what I remember about how these tables work.
+
+* [2013-10-11 Sat] 
   A table is composed of two parts, an array part and a hash part.  Let's focus solely on the hash part for now.  The hash part is an array of Nodes, each one containing a key and a value.  The interface to the hash is composed of two main functions: add_new_key and get_key.  add_new_key will set a non-existent key in the table to a value, while get_key will retrieve a value, given the key.
   get_key is rather simple, 
   1. Hash the key
@@ -20,3 +21,12 @@
   6. If the original *isn't* in it's main position, then do the same as #5, but move the original instead.  Return the new nodes position.
 
   Simple enough.  I'm still not really sure how it has an improvement over a standard chaining algorithm, except that you don't have to follow the chain to the end every time you insert an element
+
+
+* [2013-10-12 Sat] 
+  Things are going rather well.  I've made a simple implementation of a hash table using the SuperFastHash function from: http://www.azillionmonkeys.com/qed/hash.html
+  It's quite fast, apparently, and hashes any sized piece of data that you like.  According to the testing the author did, with gcc and high optimization, on an Athlon XP 1.6GHz (really old and slow), it hashed a "random buffer of 256 bytes 5 million times", and took 1.34s to do so.  That's pretty awesome.  Most of the time it is 50% faster than the "bob jenkins" hash, which is meant to be rather fast.  I'm not sure how good this is with collisions, I should probably test that myself.
+  Anyway, the table so far is only the hash part of the table, but adding the array part shouldn't be that difficult: it's just a case of checking if a value is an integer, if it is, then you move it into the array part instead.  There is more stuff involved, like figuring out when you have to increase the array size (Lua used "so that at least half the spaces are filled"), so, in other words, double it when it's full.  I can rewrite the rehash so that it only rehashes the part that has changed, so that it only hashes one of the parts if you want it to.
+  I've given the table some basic testing, where it hashes by pointer address, then inserts 1M number-number key-value pairs (what it inserts really won't have any effect.  It inserts them and then retrieves them in about 2 seconds.  That's good enough for me, for now.  Now I actually need to use the table in the programming language, which means making a programming language.
+  The next thing to do is to write the parser. and now my brain hurts.  I'm getting doubts about this: it may be substantially harder than I thought it would be.  I'm going to take a break to think about it, and come back once I'm feeling better...In a minute.
+  For now I need to just keep pushing forward with my original plan, rather than continuing to doubt myself.  The original plan is spelled out in my journals, but it's a very verbose per-character parsing scheme.

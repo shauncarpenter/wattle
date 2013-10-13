@@ -5,6 +5,32 @@ struct String;
 struct Function;
 struct Number;
 
+typedef struct Table{
+  struct Node* hash;
+  struct Value* array;
+  int array_size, hash_size;
+  struct Node* last_free;
+}Table;
+
+typedef struct Node{
+  struct Value* key;
+  struct Value* val;
+  struct Node* next;
+}Node;
+
+typedef struct String{
+  char* data;
+  int length;
+}String;
+
+typedef struct Number{
+  int data;
+}Number;
+
+typedef struct Function{
+  //No idea for this yet.
+}Function;
+
 typedef struct Value{
   char type_tag;
   union {
@@ -16,37 +42,11 @@ typedef struct Value{
   } value;
 }Value;
 
-typedef struct Table{
-  struct Node* hash;
-  struct Value* array;
-  int array_size;
-  Node* last_free; //
-}Table;
-
-typedef struct Node{
-  struct Value* key;
-  struct Value* val;
-  struct Node* next;
-  struct Node* last_free;
-}Node;
-
-typedef struct String{
-  char* data;
-  int length;
-}String;
-
-typedef struct Number{
-  double data;
-}Number;
-
-typedef struct Function{
-  //No idea for this yet.
-}Function;
 
 //const int nil_tag = 0;
-const int table_tag = 1;
-const int string_tag = 2;
-const int number_tag = 3;
-const int function_tag = 4;
-const int boolean_tag = 5;
+extern const int table_tag;
+extern const int string_tag;
+extern const int number_tag;
+extern const int function_tag;
+extern const int boolean_tag;
   

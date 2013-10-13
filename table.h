@@ -5,7 +5,7 @@
 
 #include "values.h"
 
-Table* make_table(int size);
-void add_new_key(Table* table, Value* key, Value* value);
+Table* make_table(int hash_size, int array_size);
+Node* add_new_key(Table* table, Value* key);
 Node* get_key(Table* table, Value* key);
 
